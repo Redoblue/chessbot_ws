@@ -1,0 +1,11 @@
+<launch>
+
+    <arg name="dtype" default="test" />
+
+    <!-- start the bridge -->
+    <include file="$(find kinect2_bridge)/launch/kinect2_bridge.launch" />
+ 
+    <!-- start node -->
+    <node name="collect_$(arg dtype)_set" pkg="chessbot_data_acquisition" type="collect_$(arg dtype)_set" />
+
+</launch>

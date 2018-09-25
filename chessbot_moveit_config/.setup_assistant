@@ -1,0 +1,10 @@
+moveit_setup_assistant_config:
+  URDF:
+    package: chessbot_description
+    relative_path: urdf/chessbot.urdf.xacro
+  SRDF:
+    relative_path: config/chessbot.srdf
+  CONFIG:
+    author_name: "alex pau"
+    author_email: baoliqiang@megvii.com
+    generated_timestamp: 1488265906

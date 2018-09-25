@@ -1,0 +1,23 @@
+<launch>
+    <!-- start the robot -->
+    <include file="$(find chessbot_modern_driver)/launch/chessbot_bringup.launch">
+        <arg name="limited" value="true" />
+        <arg name="robot_ip" value="192.168.199.106" />
+    </include>
+
+    <include file="$(find chessbot_moveit_config)/launch/chessbot_moveit_planning_execution.launch">
+        <arg name="limited" value="true" />
+    </include>
+ 
+    <include file="$(find chessbot_moveit_config)/launch/moveit_rviz.launch">
+        <arg name="config" value="true" />
+    </include>
+
+    <include file="$(find kinect2_bridge)/launch/kinect2_bridge.launch" />
+ 
+	<include file="$(find chessbot_calibration)/launch/publish.launch" />
+
+	<!--<node pkg="tf" type="static_transform_publisher" name="ur5_broadcaster" args="0.9453500767540619 0.35379846588132835 0.7404851341733942 -0.5564552699258106 -0.6546977028807769 0.3791733487039343 0.3434472623956579 base_link kinect2_rgb_optical_frame 100" />-->
+
+
+</launch>

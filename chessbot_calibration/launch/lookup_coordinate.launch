@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<launch>
+
+    <include file="$(find kinect2_bridge)/launch/kinect2_bridge.launch" />
+
+    <node pkg="chessbot_calibration" name="lookup_coordinate" type="lookup_coordinate"/>
+
+</launch>
