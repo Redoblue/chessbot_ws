@@ -1,5 +1,4 @@
 # chessbot: A robot who plays chinese chess
----
 
 ![这只是一个截图](http://a1.qpic.cn/psb?/V1069SLx4GM6Yv/SgVALcuYyDzgi1gSlpSEtb6bBiXX6riVLEqS8ECwtvI!/b/dDQBAAAAAAAA&ek=1&kp=1&pt=0&bo=IAGkAAAAAAARF6U!&tl=3&vuin=1300092955&tm=1538215200&sce=60-2-2&rf=viewer_4)
 
