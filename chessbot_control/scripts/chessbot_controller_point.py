@@ -15,11 +15,12 @@ from chessbot_control.srv import RG2
 INITIAL_JOINT = [1.59804368019104, -1.7011879126178187, 2.1022276878356934, -1.994666878377096, -1.6116936842547815, 0.11014064401388168]
 
 ## pose states
-POSE_0 = [-0.10892143140980294, 0.40291717033409835, 0.595788178594448, 0.03848213062389349, 0.6924433354702806, -0.020386870041952068, 0.7201567387141015]
-POSE_1 = [-0.10831412374057263, 0.6179377787615377, 0.5954665412691271, 0.03848213062389349, 0.6924433354702806, -0.020386870041952068, 0.7201567387141015]
-POSE_2 = [-0.10724553486632607, 0.6185854205342528, 0.48334377480236634, 0.03848213062389349, 0.6924433354702806, -0.020386870041952068, 0.7201567387141015]
-POSE_3 = [-0.10768195441362702, 0.8185948485166824, 0.5964728327160349, 0.03848213062389349, 0.6924433354702806, -0.020386870041952068, 0.7201567387141015]
-POSE_4 = [-0.10778283476270295, 0.8183326190854067, 0.4878744291042064, 0.03848213062389349, 0.6924433354702806, -0.020386870041952068, 0.7201567387141015]
+PRESET_QUATERNION = [0.03848213062389349, 0.6924433354702806, -0.020386870041952068, 0.7201567387141015]
+POINT_0 = [-0.10892143140980294, 0.40291717033409835, 0.595788178594448]
+POINT_1 = [-0.10831412374057263, 0.6179377787615377, 0.5954665412691271]
+POINT_2 = [-0.10724553486632607, 0.6185854205342528, 0.48334377480236634]
+POINT_3 = [-0.10768195441362702, 0.8185948485166824, 0.5964728327160349]
+POINT_4 = [-0.10778283476270295, 0.8183326190854067, 0.4878744291042064]
 
 
 def all_close(goal, actual, tolerance):
@@ -100,12 +101,12 @@ class ChessbotController(object):
     self.group_names = group_names
 
     # Go to the initial state
-    # raw_input("============ Press ENTER to go to the initial state")
+    raw_input("============ Press ENTER to go to the initial state")
     # rospy.sleep(5)
-    # self.goto_joint_goal(INITIAL_JOINT)
+    self.go_to_joint_state(INITIAL_JOINT)
     # print(self.group.get_current_joint_values())
 
-  def goto_joint_goal(self, joint_goal):
+  def go_to_joint_state(self, joint_goal):
     self.group.go(joint_goal, wait=True)
     self.group.stop()
 
@@ -115,8 +116,8 @@ class ChessbotController(object):
     current_joints = self.group.get_current_joint_values()
     return all_close(joint_goal, current_joints, 0.01)
 
-  def goto_pose_goal(self, pose_goal):
-    pose_goal = self.pose_from_state(pose_goal)
+  def go_to_point_goal(self, point_goal):
+    pose_goal = self.pose_from_point(point_goal)
     self.group.set_pose_target(pose_goal)
     plan = self.group.go(wait=True)
     self.group.stop()
@@ -178,13 +179,13 @@ class ChessbotController(object):
     return point
 
   @staticmethod
-  def pose_from_state(state):
+  def pose_from_point(point):
     pose = geometry_msgs.msg.Pose()
-    pose.position.x = state[0]
-    pose.position.y = state[1]
-    pose.position.z = state[2]
-    pose.orientation.x = state[3]
-    pose.orientation.y = state[4]
-    pose.orientation.z = state[5]
-    pose.orientation.w = state[6]
+    pose.position.x = point[0]
+    pose.position.y = point[1]
+    pose.position.z = point[2]
+    pose.orientation.x = PRESET_QUATERNION[0]
+    pose.orientation.y = PRESET_QUATERNION[1]
+    pose.orientation.z = PRESET_QUATERNION[2]
+    pose.orientation.w = PRESET_QUATERNION[3]
     return pose

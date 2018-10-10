@@ -30,15 +30,8 @@ catkin_package(
     message_runtime
 )
 
-include_directories(include)
+include_directories(
+  include ${catkin_INCLUDE_DIRS}include)
 include_directories(
   ${catkin_INCLUDE_DIRS}
 )
-
-
-## Declare a C++ executable
-#add_executable(ur_control_node src/ur_control_node.cpp src/robotarm.cpp)
-
-#target_link_libraries(ur_control_node
-#   ${catkin_LIBRARIES}
-#)

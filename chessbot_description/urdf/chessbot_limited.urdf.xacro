@@ -2,7 +2,7 @@
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="chessbot" >
 
   <property name="M_PI" value="3.14159265359" />
-  <property name="kinect_prefix1" value=""/>
+  <!--<property name="kinect_prefix1" value=""/>-->
   <property name="robot_prefix1" value=""/>
   
   <!-- common stuff -->
@@ -19,6 +19,9 @@
 
   <!-- rg2 gripper -->
   <xacro:include filename="$(find chessbot_description)/urdf/rg2.urdf.xacro" />
+
+  <!-- aruco board -->
+  <xacro:include filename="$(find chessbot_description)/urdf/aruco.urdf.xacro"/>
   
   <!-- arm -->
   <!-- we limit the first 3 joints to get a limited action space -->
@@ -30,12 +33,18 @@
     wrist_2_lower_limit="${-pi}" wrist_2_upper_limit="${pi}"
     wrist_3_lower_limit="${-pi}" wrist_3_upper_limit="${pi}"
   />
+
+    <!-- 3D sensor -->
+  <!--<xacro:sensor_kinect prefix="${robot_prefix1}"/>-->
   
   <!-- arm extras -->
-  <xacro:support_base prefix="${robot_prefix1}" kinect_prefix="${kinect_prefix1}"/>
+  <xacro:support_base prefix="${robot_prefix1}"/>
 
   <!-- rg2 pipe -->
   <xacro:rg2 prefix="${robot_prefix1}"/>
+
+  <!-- aruco board -->
+  <xacro:aruco prefix="${robot_prefix1}"/>
 
   <!-- world will be root link-->
   <link name="world" />
